@@ -6,6 +6,8 @@ import wave
 import struct
 import random
 
+FACE_DEBUG_MODE = True
+
 NEUTRAL_FACE = "neutral"
 HAPPY_FACE = "happy"
 UNHAPPY_FACE = "unhappy"
@@ -68,33 +70,57 @@ def run_webserver():
   ioloop.IOLoop.instance().start()
 
 
+def input_to_face(face):
+  if face == 'h':
+    face_type = HAPPY_FACE
+  elif face == 'u':
+    face_type = UNHAPPY_FACE
+  elif face == 'a':
+    face_type = ANGRY_FACE
+  elif face == 's':
+    face_type = SURPRISED_FACE
+  elif face == 'finger':
+    face_type = FINGER
+  else:
+    face_type = NEUTRAL_FACE
+  return face_type
+
+
+def send_face_position(face_type):
+  for client in clients:
+    client.write_message(face_type)
+
+
+def tweet_available():
+  pass
+
+
 if __name__ == '__main__':
+
+  # Init
   webserver = threading.Thread(target=run_webserver)
   webserver.daemon = True
-
   webserver.start()
 
-  while (1):
-    face = raw_input('What\'s your face? ')
-    face_type = NEUTRAL_FACE
+  # Send first face
+  face_type = NEUTRAL_FACE
+  send_face_position(send_face_position)
 
-    if face == 'h':
-      face_type = HAPPY_FACE
-    elif face == 'u':
-      face_type = UNHAPPY_FACE
-    elif face == 'a':
-      face_type = ANGRY_FACE
-    elif face == 's':
-      face_type = SURPRISED_FACE
-    elif face == 'finger':
-      face_type = FINGER
-    else:
-      face_type = NEUTRAL_FACE
+
+  # Rorys face debug mode
+  if FACE_DEBUG_MODE:
+    while (1):
+      face = raw_input('What\'s your face? ')
+      position = input_to_face(face)
+
+  while (1):
+    if tweet_available():
+      print("Do something here")
+
 
     # out_array = bitarray()
     # for i in range(0, len(in_array)):
     #   for j in range(0, len(in_array[i])):
     #     out_array.append(True if in_array[i][j] == 1 else False)
 
-    for client in clients:
-      client.write_message(face_type)
+
