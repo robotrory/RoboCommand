@@ -22,48 +22,51 @@ p = pyaudio.PyAudio()
 
 stream = None
 
+
 class SocketHandler(websocket.WebSocketHandler):
-    def check_origin(self, origin):
-        return True
+  def check_origin(self, origin):
+    return True
 
-    def open(self):
-        global stream
-        if len(clients) < 1:
-          print("opening stream")
-          stream = p.open(format=p.get_format_from_width(2),
-                  channels=1,
-                  rate=16000,
-                  output=True)
+  def open(self):
+    global stream
+    if len(clients) < 1:
+      print("opening stream")
+      stream = p.open(format=p.get_format_from_width(2),
+                      channels=1,
+                      rate=16000,
+                      output=True)
 
-        if self not in clients:
-            clients.append(self)
+    if self not in clients:
+      clients.append(self)
 
-    def on_close(self):
-        global stream
-        if self in clients:
-            clients.remove(self)
+  def on_close(self):
+    global stream
+    if self in clients:
+      clients.remove(self)
 
-        if len(clients) < 1:
-          print("closing stream")
-          stream.stop_stream()
-          stream.close()
-          stream = None
+    if len(clients) < 1:
+      print("closing stream")
+      stream.stop_stream()
+      stream.close()
+      stream = None
 
-    def on_message(self, message):
-      global stream
+  def on_message(self, message):
+    global stream
 
-      if stream is not None:
-        print("message")
-        stream.write(message)
+    if stream is not None:
+      print("message")
+      stream.write(message)
 
 
 app = web.Application([
-    (r'/', SocketHandler)
+  (r'/', SocketHandler)
 ])
+
 
 def run_webserver():
   app.listen(3110)
   ioloop.IOLoop.instance().start()
+
 
 if __name__ == '__main__':
   webserver = threading.Thread(target=run_webserver)
@@ -72,27 +75,26 @@ if __name__ == '__main__':
   webserver.start()
 
   while (1):
-        face = raw_input('What\'s your face? ')
-        face_type = NEUTRAL_FACE
+    face = raw_input('What\'s your face? ')
+    face_type = NEUTRAL_FACE
 
-        if face == 'h':
-          face_type = HAPPY_FACE
-        elif face == 'u':
-          face_type = UNHAPPY_FACE
-        elif face == 'a':
-          face_type = ANGRY_FACE
-        elif face == 's':
-          face_type = SURPRISED_FACE
-        elif face == 'finger':
-          face_type = FINGER
-        else:
-          face_type = NEUTRAL_FACE
+    if face == 'h':
+      face_type = HAPPY_FACE
+    elif face == 'u':
+      face_type = UNHAPPY_FACE
+    elif face == 'a':
+      face_type = ANGRY_FACE
+    elif face == 's':
+      face_type = SURPRISED_FACE
+    elif face == 'finger':
+      face_type = FINGER
+    else:
+      face_type = NEUTRAL_FACE
 
-        # out_array = bitarray()
-        # for i in range(0, len(in_array)):
-        #   for j in range(0, len(in_array[i])):
-        #     out_array.append(True if in_array[i][j] == 1 else False)
+    # out_array = bitarray()
+    # for i in range(0, len(in_array)):
+    #   for j in range(0, len(in_array[i])):
+    #     out_array.append(True if in_array[i][j] == 1 else False)
 
-        for client in clients:
-          client.write_message(face_type)
-    
+    for client in clients:
+      client.write_message(face_type)
