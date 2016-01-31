@@ -1,16 +1,16 @@
 import threading
-import pyaudio
+
 import speech_recognition as sr
 
 r = sr.Recognizer()
 
 try:
-    import pyaudio
+
     class Audio(sr.AudioSource):
 
         def __init__(self, trueSample):
 
-          self.format = pyaudio.paInt16
+
           self.SAMPLE_WIDTH = 2
           self.SAMPLE_RATE = 16000
           self.CHUNK = 1024

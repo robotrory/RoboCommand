@@ -16,6 +16,50 @@ stream = None
 
 p = pyaudio.PyAudio()
 
+import speech_recognition as sr
+
+class BufferContainer(sr.AudioSource):
+    def __init__(self):
+        self.lock = threading.Lock()
+        self.lock.acquire()
+        self.locked = True
+        self.lines = []
+
+    def write(self, text):
+
+        self.lines.append(text)
+        if (self.locked):
+          self.lock.release()
+          self.locked = False
+
+    def writelines(self, *args):
+         for item in args: self.lines.append(item)
+
+    def open(self):
+        self.lines = []
+
+    def read(self, extra):
+
+        self.lock.acquire()
+        self.locked = True
+
+        elem = None
+        if (len(self.lines) > 0):
+          elem = self.lines.pop()
+
+        # print("elem: %s" % elem)
+        if (len(self.lines) > 0):
+          if (self.locked):
+            self.lock.release()
+            self.locked = False
+
+        return elem
+
+    def close (self):
+        pass
+
+buffer = BufferContainer()
+
 class Handler(websocket.WebSocketHandler):
   def check_origin(self, origin):
     return True
@@ -26,13 +70,13 @@ class Handler(websocket.WebSocketHandler):
           print("opening streams")
           
           stream = p.open(format=p.get_format_from_width(2),
-                  input=True,
+                  # input=True,
                   channels=1,
                   rate=16000,
                   output=True)
 
 
-          speech_listener = threading.Thread(target=Speech.listen_for_speech, args=(stream,))
+          speech_listener = threading.Thread(target=Speech.listen_for_speech, args=(buffer,))
           speech_listener.daemon = True
           speech_listener.start()
 
@@ -51,7 +95,10 @@ class Handler(websocket.WebSocketHandler):
         stream = None
 
   def on_message(self, message):
-    global stream
+    global stream, buffer
+
+    if buffer is not None:
+      buffer.write(message)
 
     if stream is not None:
       stream.write(message)
