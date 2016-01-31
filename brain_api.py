@@ -69,4 +69,4 @@ def get_response(message):
   # else:
   #   return CONFUSE_RESPONSE
 
-print(get_response("asdasde"))
+# print(get_response("asdasde"))
