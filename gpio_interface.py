@@ -10,7 +10,7 @@ import thread
 MAIN_SERVO_PIN = 22
 MAIN_MESSAGE_PIN = 23
 
-TIME_BETWEEN = 1
+TIME_BETWEEN = (1 / 1000) * 50
 value = 1
 
 

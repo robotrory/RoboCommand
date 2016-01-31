@@ -1,3 +1,5 @@
+import gpio_interface as BOT
+
 def action_be_happy():
   pass
 
