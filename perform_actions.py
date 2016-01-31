@@ -1,4 +1,4 @@
-import gpio_interface as BOT
+import serial_sender as BOT
 
 def action_be_happy():
   pass
@@ -17,15 +17,3 @@ def action_be_surprised():
 
 def action_be_surprised():
   pass
-
-
-def test():
-
-  # BOT.outName("Hello")
-  BOT.outServo(3, 100)
-
-  shouldLoop = 1
-  while shouldLoop:
-    pass
-
-test()
