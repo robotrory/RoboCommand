@@ -1,6 +1,7 @@
 import json
 import urllib
 import urllib2
+from RoboCommand import brain
 import sentiment_analysis as RESPONSE_INFO
 import say_something as TALK
 import perform_actions as ACTION
@@ -14,7 +15,7 @@ except ImportError:
     sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
     import apiai
 
-CONFUSE_RESPONSE = "I'm not sure what you mean"
+CONFUSE_RESPONSE = "not sure what you mean"
 
 CLIENT_ACCESS_TOKEN = '13096bfb50a44c9aa488935a68e83951'
 SUBSCRIPTION_KEY = '514967bc-08d6-474c-8a3d-1ed4b7e774f1 '
