@@ -1,6 +1,8 @@
 import os
 import SocketManager
 import emotions as Emotions
+import perform_actions as ACTION
+import sentiment_analysis as RESPONSE_INFO
 
 messageIndex = 0
 
@@ -24,9 +26,16 @@ def say_message(message):
       import brain as Brain
       Brain.searchTwitterForValue(restOfPhrase)
       return
-    else:
-      for client in SocketManager.clients:
-          client.write_message("emotion:%s" % action)
+    elif action == "happy":
+      ACTION.action_be_happy()
+    elif action == "unhappy":
+      ACTION.action_be_unhappy()
+    elif action == "angry":
+      ACTION.action_be_angry()
+    elif action == "surprised":
+      ACTION.action_be_surprised()
+  else:
+    RESPONSE_INFO.analyse(message)
 
   thisIndex = messageIndex
 

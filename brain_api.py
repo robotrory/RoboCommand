@@ -1,7 +1,6 @@
 import json
 import urllib
 import urllib2
-import sentiment_analysis as RESPONSE_INFO
 import say_something as TALK
 import perform_actions as ACTION
 import os.path, sys
@@ -26,7 +25,6 @@ def query(message):
   print("querying message: '%s'" % message)
   message_response = get_response(message)
   if len(message_response) > 0:
-    RESPONSE_INFO.analyse(message_response)
     TALK.say_message(message_response)
   else:
     ACTION.action_be_confused()

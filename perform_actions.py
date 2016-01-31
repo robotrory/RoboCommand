@@ -1,4 +1,5 @@
 import serial_sender as BOT
+import SocketManager
 
 LEFT_SHOULDER = 1
 LEFT_WING = 3
@@ -15,18 +16,29 @@ def action_be_happy():
   BOT.sendServo(LEFT_WING, 90)
   BOT.sendServo(LEFT_ELBOW, 90)
   BOT.sendServo(LEFT_ELBOW, 90)
+
+  for client in SocketManager.clients:
+          client.write_message("emotion:happy")
   pass
 
 def action_be_unhappy():
+  for client in SocketManager.clients:
+          client.write_message("emotion:unhappy")
   pass
 
 def action_be_angry():
+  for client in SocketManager.clients:
+          client.write_message("emotion:angry")
   pass
 
 def action_be_neutral():
+  for client in SocketManager.clients:
+          client.write_message("emotion:neutral")
   pass
 
 def action_be_surprised():
+  for client in SocketManager.clients:
+          client.write_message("emotion:surprised")
   pass
 
 

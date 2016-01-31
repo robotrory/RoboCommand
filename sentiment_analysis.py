@@ -3,7 +3,7 @@ import json
 import urllib
 import urllib2
 import perform_actions as ACTION
-import SocketManager
+
 
 def analyse(message):
   values = {
@@ -20,35 +20,26 @@ def analyse(message):
     # Opinion
     if data['score_tag'] == "P" or data['score_tag'] == "P+":
       print("Be happy")
-      for client in SocketManager.clients:
-          client.write_message("emotion:happy")
       ACTION.action_be_happy()
 
     elif data['score_tag'] == "N" or data['score_tag'] == "N+":
       print("Be Sad")
-      for client in SocketManager.clients:
-          client.write_message("emotion:unhappy")
       ACTION.action_be_unhappy()
     else:
       ACTION.action_be_surprised()
-      for client in SocketManager.clients:
-          client.write_message("emotion:surprised")
       print("No Comment")
   else:
     if data['score_tag'] == "P" or data['score_tag'] == "P+":
       print("I agree")
-      for client in SocketManager.clients:
-          client.write_message("emotion:surprised")
+     
       ACTION.action_be_surprised()
 
     elif data['score_tag'] == "N" or data['score_tag'] == "N+":
       print("Be Angry")
-      for client in SocketManager.clients:
-          client.write_message("emotion:angry")
+      
       ACTION.action_be_angry()
     else:
-      for client in SocketManager.clients:
-          client.write_message("emotion:surprised")
+      
       ACTION.action_be_surprised()
 
 
