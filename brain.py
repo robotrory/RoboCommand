@@ -6,7 +6,7 @@ json_data = ""
 dataCheck = False
 import say_something as TALK
 import SocketManager
-
+import brain_api as AIBot
 consumer_key = '1MUDOQv80dafJg6sMrjr3YRol'
 consumer_secret = 'uizOJFjZ8nGmgvCbPLupeQiE5fhjNYFDeqXlNXif7CtJyjIM6H'
 access_token = '4864903228-PVG0k3kFy8ojtLMFhUIewkpjUybpPJo1WBVDFdD'
@@ -28,11 +28,16 @@ class MyListener(StreamListener):
     def on_data(self, dataTwitter):
         global dataCheck
         text = json.loads(dataTwitter)['text'].replace("@ArmHackathonBot ", "")
+        isTalkToSteve = "#TalkToSteve" in text
         text = text.replace("#PublicOpinion", "")
+        text = text.replace("#TalkToSteve", "")
         name = json.loads(dataTwitter)['user']['name']
         nameTwitter = json.loads(dataTwitter)['user']['screen_name']
         #get data
-        processTweet(text,name,nameTwitter)
+        if isTalkToSteve:
+            AIBot.query(text)
+        else:
+            processTweet(text,name,nameTwitter)
         dataCheck = True
         return True
 
@@ -45,7 +50,7 @@ class MyListener(StreamListener):
 
 def begin_streaming():
     twitter_stream = Stream(auth, MyListener())
-    twitter_stream.filter(track=['@ArmHackathonBot','#PublicOpinion'], async=True)
+    twitter_stream.filter(track=['@ArmHackathonBot','#PublicOpinion','#TalkToSteve'], async=True)
 
 # Search twitter
 def searchTwitter(info):
