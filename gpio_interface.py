@@ -71,10 +71,3 @@ def outServo(num, degree):
 
 
 
-outName("Hello")
-outServo(3, 100)
-
-shouldLoop = 1
-while shouldLoop:
-  pass
-
