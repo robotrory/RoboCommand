@@ -32,6 +32,10 @@ def send_voice(message):
   for client in SocketManager.clients:
     client.write_message(url)
 
+def keep_alive():
+  while True:
+    time.sleep(1)
+    print("")
 
 if __name__ == '__main__':
 
@@ -43,6 +47,10 @@ if __name__ == '__main__':
   webserver = threading.Thread(target=run_webserver)
   webserver.daemon = True
   webserver.start()
+
+  alive = threading.Thread(target=keep_alive())
+  alive.daemon = True
+  alive.start()
 
   # Send first face
   face_type = EMOTIONS.ANGRY_FACE

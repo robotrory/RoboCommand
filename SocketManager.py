@@ -20,17 +20,14 @@ import speech_recognition as sr
 
 class BufferContainer(sr.AudioSource):
     def __init__(self):
-        self.lock = threading.Lock()
-        self.lock.acquire()
-        self.locked = True
+        self.event = threading.Event()
+        self.event.clear()
         self.lines = []
 
     def write(self, text):
 
         self.lines.append(text)
-        if (self.locked):
-          self.lock.release()
-          self.locked = False
+        self.event.set()
 
     def writelines(self, *args):
          for item in args: self.lines.append(item)
@@ -40,18 +37,15 @@ class BufferContainer(sr.AudioSource):
 
     def read(self, extra):
 
-        self.lock.acquire()
-        self.locked = True
+        self.event.wait()
 
         elem = None
         if (len(self.lines) > 0):
           elem = self.lines.pop()
 
-        # print("elem: %s" % elem)
-        if (len(self.lines) > 0):
-          if (self.locked):
-            self.lock.release()
-            self.locked = False
+        # print("")
+        if (len(self.lines) < 1):
+            self.event.clear()
 
         return elem
 
