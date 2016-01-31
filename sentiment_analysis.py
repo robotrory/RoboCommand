@@ -3,7 +3,6 @@ import json
 import urllib
 import urllib2
 import perform_actions as ACTION
-import say_something as TALK
 
 def analyse(message):
   values = {
@@ -32,12 +31,10 @@ def analyse(message):
     if data['score_tag'] == "P" or data['score_tag'] == "P+":
       print("I agree")
       ACTION.action_be_surprised()
-      TALK.say_message("I agree")
 
     elif data['score_tag'] == "N" or data['score_tag'] == "N+":
       print("Be Angry")
       ACTION.action_be_angry()
-      TALK.say_message("I'm sorry to hear")
     else:
       ACTION.action_be_surprised()
 

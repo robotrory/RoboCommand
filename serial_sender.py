@@ -6,6 +6,7 @@ def sendServo(servoNum, degree):
   port.write('(%s,%s)' % (servoNum, degree))
 
 def sendMessage(message):
+  message = message.replace('|', '')
   port.write('(6,%s)' % (message))
 
 
