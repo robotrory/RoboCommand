@@ -4,6 +4,8 @@ from tweepy import OAuthHandler
 import tweepy
 json_data = ""
 dataCheck = False
+import say_something as TALK
+import SocketManager
 
 consumer_key = '1MUDOQv80dafJg6sMrjr3YRol'
 consumer_secret = 'uizOJFjZ8nGmgvCbPLupeQiE5fhjNYFDeqXlNXif7CtJyjIM6H'
@@ -30,7 +32,7 @@ class MyListener(StreamListener):
         name = json.loads(dataTwitter)['user']['name']
         nameTwitter = json.loads(dataTwitter)['user']['screen_name']
         #get data
-        main(text,name,nameTwitter)
+        processTweet(text,name,nameTwitter)
         dataCheck = True
         return True
 
@@ -105,10 +107,15 @@ def formJSON(sentimentValue,text, name, nameTwitter):
     data['nameTwitter'] = nameTwitter
     return json.dumps(data)
 
-def main(text, name, nameTwitter):
-    global json_data
+def processTweet(text, name, nameTwitter):
     value = sentimentValue(searchTwitter(text))
-    json_data = formJSON(value,text,name,nameTwitter)
+
+    emotion = "sad" if (value < 0) else "happy"
+    adjective = "negative" if (value < 0) else "positive"
+
+    TALK.say_message("!%s I have just received a tweet. It appears that on the subject of %s, the public's perception is %s" % (emotion, adjective, emotion))
+
+    # json_data = formJSON(value,text,name,nameTwitter)
 
 def searchTwitterForValue(text):
     value = sentimentValue(searchTwitter(text))

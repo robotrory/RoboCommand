@@ -24,8 +24,8 @@ def say_message(message):
         client.write_message("emotion:%s" % action)
 
   thisIndex = messageIndex
-  dir = os.path.dirname(__file__)
-  filename = os.path.join(dir, '/audio/%s.wav' % thisIndex)
+
+  filename = os.path.realpath('audio/%s.wav' % thisIndex)
   os.system("espeak -w %s \"%s\"" % (filename, restOfPhrase))
   messageIndex = messageIndex + 1
   for client in SocketManager.clients:
