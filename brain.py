@@ -38,10 +38,11 @@ class MyListener(StreamListener):
         time.sleep(0.5)
         return True
 
-twitter_stream = Stream(auth, MyListener())
+def begin_streaming():
+    twitter_stream = Stream(auth, MyListener())
 
-twitter_stream = Stream(auth, MyListener())
-twitter_stream.filter(track=['@ArmHackathonBot'], async=True)
+    twitter_stream = Stream(auth, MyListener())
+    twitter_stream.filter(track=['@ArmHackathonBot'], async=True)
 
 # Search twitter
 def searchTwitter(info):

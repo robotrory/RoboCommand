@@ -1,6 +1,7 @@
 import threading
 
 import speech_recognition as sr
+import brain_api as AIBot
 
 r = sr.Recognizer()
 
@@ -78,7 +79,8 @@ def process_processor_result(result, callingCode):
 
           if(len(question.split()) > 2):
             processedRounds.append(callingCode)
-            print("Steve thinks you said: %s" % result)
+            print("Steve thinks you said: %s" % question)
+            AIBot.query(question)
 
 
 def listen_for_speech(input_stream):

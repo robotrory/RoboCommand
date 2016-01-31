@@ -1,9 +1,9 @@
-NEUTRAL_FACE = "neutral"
-HAPPY_FACE = "happy"
-UNHAPPY_FACE = "unhappy"
-ANGRY_FACE = "angry"
-SURPRISED_FACE = "surprised"
-FINGER = "finger"
+NEUTRAL_FACE = "emotion:neutral"
+HAPPY_FACE = "emotion:happy"
+UNHAPPY_FACE = "emotion:unhappy"
+ANGRY_FACE = "emotion:angry"
+SURPRISED_FACE = "emotion:surprised"
+FINGER = "emotion:finger"
 
 def input_to_face(face):
   if face == 'h':

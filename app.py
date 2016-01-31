@@ -11,6 +11,8 @@ import SocketManager
 import twitter_interface as Twit
 import say_something as Speech
 
+import brain as Twitter
+
 
 FACE_DEBUG_MODE = True
 
@@ -41,12 +43,17 @@ if __name__ == '__main__':
 
   # Init
   app = web.Application([
+    (r'/audio/(.*)', web.StaticFileHandler, {'path': 'audio'}),
     (r'/', SocketManager.Handler)
   ])
 
   webserver = threading.Thread(target=run_webserver)
   webserver.daemon = True
   webserver.start()
+
+  twitterServer = threading.Thread(target=Twitter.begin_streaming)
+  twitterServer.daemon = True
+  twitterServer.start()
 
   alive = threading.Thread(target=keep_alive())
   alive.daemon = True
