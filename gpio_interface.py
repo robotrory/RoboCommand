@@ -3,12 +3,12 @@ import os
 import thread
 
 # For Robot:
-#MAIN_SERVO_PIN = 0
-#MAIN_SERVO_PIN = 1
+MAIN_SERVO_PIN = 0
+MAIN_MESSAGE_PIN = 1
 
 # For james:
-MAIN_SERVO_PIN = 22
-MAIN_MESSAGE_PIN = 23
+# MAIN_SERVO_PIN = 22
+# MAIN_MESSAGE_PIN = 23
 
 TIME_BETWEEN = (1 / 1000) * 50
 value = 1
