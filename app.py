@@ -1,8 +1,10 @@
+import time
 from tornado import web, ioloop
 import threading
 import emotions as EMOTIONS
 import SocketHandler
 import twitter_interface as Twit
+import say_something as Speech
 
 FACE_DEBUG_MODE = True
 
@@ -14,6 +16,14 @@ def run_webserver():
 def send_face_position(face_type):
   for client in SocketHandler.clients:
     client.write_message(face_type)
+
+def send_voice(message):
+  Speech.say_message(message)
+  time.sleep(0.5)
+  url = "audio:speech.wav"
+
+  for client in SocketHandler.clients:
+    client.write_message(url)
 
 
 if __name__ == '__main__':
