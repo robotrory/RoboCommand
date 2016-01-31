@@ -16,6 +16,8 @@ auth.set_access_token(access_token, access_secret)
 api = tweepy.API(auth)
 
 
+
+
 # Gets tweets to @ArmHackathonBot
 from tweepy import Stream
 from tweepy.streaming import StreamListener, json
@@ -24,6 +26,7 @@ class MyListener(StreamListener):
     def on_data(self, dataTwitter):
         global dataCheck
         text = json.loads(dataTwitter)['text'].replace("@ArmHackathonBot ", "")
+        text = text.replace("#PublicOpinion", "")
         name = json.loads(dataTwitter)['user']['name']
         nameTwitter = json.loads(dataTwitter)['user']['screen_name']
         #get data
@@ -40,9 +43,7 @@ class MyListener(StreamListener):
 
 def begin_streaming():
     twitter_stream = Stream(auth, MyListener())
-
-    twitter_stream = Stream(auth, MyListener())
-    twitter_stream.filter(track=['@ArmHackathonBot'], async=True)
+    twitter_stream.filter(track=['@ArmHackathonBot','#PublicOpinion'], async=True)
 
 # Search twitter
 def searchTwitter(info):
@@ -77,9 +78,9 @@ def convertSentiment(data):
     total = 0
     for i in data :
         if i['result'] == 'Positive':
-            total = total + float(i['confidence'])
+                total = total + 1
         elif i['result'] == 'Negative':
-            total = total - float(i['confidence'])
+                total = total - 2
     return total
 
 # Input txt list, returns sentiment values as a Json List
@@ -97,21 +98,21 @@ def sentimentValue(tweets):
     return sentiment
 
 def formJSON(sentimentValue,text, name, nameTwitter):
-    global json_data
     data = {}
     data['sentimentValue'] = sentimentValue
     data['text'] = text
     data['name'] = name
     data['nameTwitter'] = nameTwitter
-    json_data = json.dumps(data)
+    return json.dumps(data)
 
 def main(text, name, nameTwitter):
+    global json_data
     value = sentimentValue(searchTwitter(text))
-    formJSON(value,text,name,nameTwitter)
-    print(value)
-    print(text)
-    print(name)
-    print(nameTwitter)
+    json_data = formJSON(value,text,name,nameTwitter)
+
+def searchTwitterForValue(text):
+    value = sentimentValue(searchTwitter(text))
+    return value
 
 def newData():
     global json_data
