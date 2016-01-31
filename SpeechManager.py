@@ -84,11 +84,11 @@ def listen_for_speech(input_stream):
     google_processor.daemon = True
     google_processor.start()
 
-    # wit_processor = threading.Thread(target=wit_audio, args=(audio,))
-    # wit_processor.daemon = True
-    # wit_processor.start()
+    wit_processor = threading.Thread(target=wit_audio, args=(audio,))
+    wit_processor.daemon = True
+    wit_processor.start()
 
-    # ibm_processor = threading.Thread(target=ibm_audio, args=(audio,))
-    # ibm_processor.daemon = True
-    # ibm_processor.start()
+    ibm_processor = threading.Thread(target=ibm_audio, args=(audio,))
+    ibm_processor.daemon = True
+    ibm_processor.start()
 
