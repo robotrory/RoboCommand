@@ -75,6 +75,7 @@ def listen_for_speech(input_stream):
   while input_stream is not None:
 
     with Audio(input_stream) as source:
+        r.adjust_for_ambient_noise(source)
         print("listening to stream")
         audio = r.listen(source)
 
