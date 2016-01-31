@@ -14,6 +14,3 @@ def action_be_neutral():
 
 def action_be_surprised():
   pass
-
-def action_be_surprised():
-  pass
