@@ -1,23 +1,23 @@
 import time
 import os
 import thread
-
-# For Robot:
-#MAIN_SERVO_PIN = 0
-#MAIN_SERVO_PIN = 1
-
-# For james:
-MAIN_SERVO_PIN = 22
-MAIN_MESSAGE_PIN = 23
-
-TIME_BETWEEN = (1 / 1000) * 50
-value = 1
-
-
-START_COM = [1,1,1,1,1,1,1,1]
-END_COM = [0,0,0,0,0,0,0,0]
-RESET = [0,0]
-MAX_LEN_MESSAGE = 10
+#
+# # For Robot:
+# MAIN_SERVO_PIN = 0
+# MAIN_MESSAGE_PIN = 1
+#
+# # For james:
+# # MAIN_SERVO_PIN = 22
+# # MAIN_MESSAGE_PIN = 23
+#
+# TIME_BETWEEN = (1 / 1000) * 50
+# value = 1
+#
+#
+# START_COM = [1,1,1,1,1,1,1,1]
+# END_COM = [0,0,0,0,0,0,0,0]
+# RESET = [0,0]
+# MAX_LEN_MESSAGE = 10
 
 
 def sendByte( cmd, pin ):
