@@ -5,7 +5,7 @@ import tweepy
 json_data = ""
 dataCheck = False
 import say_something as TALK
-import SocketManager
+
 import brain_api as AIBot
 consumer_key = '1MUDOQv80dafJg6sMrjr3YRol'
 consumer_secret = 'uizOJFjZ8nGmgvCbPLupeQiE5fhjNYFDeqXlNXif7CtJyjIM6H'
