@@ -110,15 +110,22 @@ def formJSON(sentimentValue,text, name, nameTwitter):
 def processTweet(text, name, nameTwitter):
     value = sentimentValue(searchTwitter(text))
 
-    emotion = "sad" if (value < 0) else "happy"
+    emotion = "unhappy" if (value < 0) else "happy"
     adjective = "negative" if (value < 0) else "positive"
 
-    TALK.say_message("!%s I have just received a tweet. It appears that on the subject of %s, the public's perception is %s" % (emotion, adjective, emotion))
+    TALK.say_message("!%s I have just received a tweet. It appears that on the subject of %s, the public's perception is %s" % (emotion, text, adjective))
 
     # json_data = formJSON(value,text,name,nameTwitter)
 
 def searchTwitterForValue(text):
     value = sentimentValue(searchTwitter(text))
+
+    emotion = "unhappy" if (value < 0) else "happy"
+    adjective = "negative" if (value < 0) else "positive"
+
+    TALK.say_message("!%s It appears that the public's perception of your question is %s" % (emotion, adjective))
+
+
     return value
 
 def newData():

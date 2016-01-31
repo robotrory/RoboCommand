@@ -20,13 +20,18 @@ def say_message(message):
   print("restOfPhrase: %s" % restOfPhrase)
 
   if action is not None:
-    for client in SocketManager.clients:
-        client.write_message("emotion:%s" % action)
+    if action.lower() == "twitter":
+      import brain as Brain
+      Brain.searchTwitterForValue(restOfPhrase)
+      return
+    else:
+      for client in SocketManager.clients:
+          client.write_message("emotion:%s" % action)
 
   thisIndex = messageIndex
 
   filename = os.path.realpath('audio/%s.wav' % thisIndex)
-  os.system("espeak -w %s \"%s\"" % (filename, restOfPhrase))
+  os.system("espeak -g 10 -w %s \"%s\"" % (filename, restOfPhrase))
   messageIndex = messageIndex + 1
   for client in SocketManager.clients:
         client.write_message("audio:http://33ca8f47.ngrok.io/audio/%s.wav" % thisIndex)
