@@ -24,16 +24,6 @@ def send_face_position(face_type):
   for client in SocketManager.clients:
     client.write_message(face_type)
 
-
-def send_voice(message):
-  Speech.say_message(message)
-  time.sleep(0.5)
-  url = "audio:speech.wav"
-
-
-  for client in SocketManager.clients:
-    client.write_message(url)
-
 def keep_alive():
   while True:
     time.sleep(1)

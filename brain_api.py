@@ -1,7 +1,6 @@
 import json
 import urllib
 import urllib2
-from RoboCommand import brain
 import sentiment_analysis as RESPONSE_INFO
 import say_something as TALK
 import perform_actions as ACTION
