@@ -26,6 +26,8 @@ def say_message(message):
       import brain as Brain
       Brain.searchTwitterForValue(restOfPhrase)
       return
+    elif action == "neutral":
+      ACTION.action_be_neutral()
     elif action == "happy":
       ACTION.action_be_happy()
     elif action == "unhappy":

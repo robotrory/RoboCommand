@@ -73,6 +73,7 @@ def ibm_audio(audio, callingCode):
 
 
 def process_processor_result(result, callingCode):
+  print("Received text: '%s'" % result)
   if((callingCode not in processedRounds) and len(result.split()) > 2):
     if "steve" in result.lower():
           question = result[(result.lower().index("steve") + len("setve")):len(result)]
