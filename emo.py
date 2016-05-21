@@ -2,13 +2,13 @@ import serial_sender as BOT
 # import SocketManager
 import time
 
-LEFT_SHOULDER = 1
-LEFT_WING = 3
-LEFT_ELBOW = 5
-RIGHT_SHOULDER = 0
-RIGHT_WING = 2
-RIGHT_ELBOW = 4
-HEAD = 6
+LEFT_SHOULDER = 0
+LEFT_WING = 4
+LEFT_ELBOW = 2
+RIGHT_SHOULDER = 6
+RIGHT_WING = 1
+RIGHT_ELBOW = 3
+HEAD = 5
 
 lastKnownHeadPosition = 20
 
