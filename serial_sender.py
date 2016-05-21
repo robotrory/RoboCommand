@@ -3,7 +3,7 @@ import time
 port = serial.Serial("/dev/ttyAMA0", baudrate=9600, timeout=3.0)
 
 def sendServo(servoNum, degree):
-  print("")
+  print("Sending message")
   port.write('(%s,%s)' % (servoNum, degree))
 
 def sendMessage(message):
