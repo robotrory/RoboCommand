@@ -18,10 +18,10 @@ def action_tilt_head():
     currentPosition = lastKnownHeadPosition
     for x in range(0, positionTo):
         if positionTo > currentPosition:
-            currentPosition++
+            currentPosition += 1
             BOT.sendServo(HEAD, currentPosition)
         elif positionTo < currentPosition:
-            currentPosition--
+            currentPosition -= 1
             BOT.sendServo(HEAD, currentPosition)
 
     lastKnownHeadPosition = currentPosition
