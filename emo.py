@@ -89,3 +89,5 @@ def move_head():
 
 t= Timer(3.0,init)
 t.start()
+
+if __name__ == '__main__':
