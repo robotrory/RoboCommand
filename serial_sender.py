@@ -4,7 +4,6 @@ import time
 port = serial.Serial("/dev/ttyUSB0", baudrate=9600, timeout=3.0)
 
 def sendServo(servoNum, degree):
-  print("Sending message")
   port.write('(%s,%s)' % (servoNum, degree))
 
 def sendMessage(message):
