@@ -2,7 +2,7 @@ import serial_sender as BOT
 # import SocketManager
 import time
 from threading import Timer
-import random 
+import random
 LEFT_SHOULDER = 0
 LEFT_WING = 4
 LEFT_ELBOW = 2
@@ -80,6 +80,7 @@ def init():
    move_head()
 
 def move_head():
+    global threading
     action_tilt_head()
     threading.Timer(2.0, move_head).start()
 
