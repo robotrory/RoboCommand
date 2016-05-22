@@ -2,7 +2,7 @@ import serial_sender as BOT
 # import SocketManager
 import time
 from threading import Timer
-
+import random 
 LEFT_SHOULDER = 0
 LEFT_WING = 4
 LEFT_ELBOW = 2
