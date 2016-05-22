@@ -83,7 +83,8 @@ def init():
 def move_head():
     global threading
     action_tilt_head()
-    Timer(2.0, move_head).start()
+    new_move_time = random.randint(2, 20)
+    Timer(new_move_time, move_head).start()
 
 
 
