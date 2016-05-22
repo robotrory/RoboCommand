@@ -89,3 +89,10 @@ def move_head():
 
 t= Timer(3.0,init)
 t.start()
+if __name__ == '__main__':
+    while True:
+        user_input = raw_input('Which emotion')
+        if user_input == "H":
+            action_be_happy()
+        else:
+            action_be_reset()
