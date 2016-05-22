@@ -45,5 +45,5 @@ def say_message(message):
   os.system("espeak -g 10 -w %s \"%s\"" % (filename, restOfPhrase))
   messageIndex = messageIndex + 1
   for client in SocketManager.clients:
-        client.write_message("audio:http://33ca8f47.ngrok.io/audio/%s.wav" % thisIndex)
+        client.write_message("audio:http://bb4d0cce.ngrok.io/audio/%s.wav" % thisIndex)
   

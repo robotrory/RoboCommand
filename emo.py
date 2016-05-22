@@ -76,6 +76,16 @@ def init():
    print("Reseting...")
    action_be_reset()
 
+   class MyThread(Thread):
+    def __init__(self, event):
+        Thread.__init__(self)
+        self.stopped = event
+
+    def run(self):
+        while not self.stopped.wait(1):
+            print "my thread"
+            action_tilt_head()
+
 
 t= Timer(3.0,init)
 t.start()
