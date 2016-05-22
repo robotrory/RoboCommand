@@ -33,11 +33,11 @@ def action_tilt_head():
 
 def action_be_happy():
   BOT.sendServo(RIGHT_SHOULDER, 0)
-  BOT.sendServo(LEFT_SHOULDER, 180)
+  BOT.sendServo(LEFT_SHOULDER, 100)
   BOT.sendServo(RIGHT_WING, 0)
   BOT.sendServo(LEFT_WING, 90)
-  BOT.sendServo(LEFT_ELBOW, 90)
-  BOT.sendServo(LEFT_ELBOW, 90)
+  BOT.sendServo(LEFT_ELBOW, 0)
+  BOT.sendServo(RIGHT_ELBOW, 100)
 #   for client in SocketManager.clients:
 #           client.write_message("emotion:happy")
 #   pass
