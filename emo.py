@@ -11,10 +11,11 @@ RIGHT_WING = 1
 RIGHT_ELBOW = 6
 HEAD = 5
 
-global lastKnownHeadPosition
+
 lastKnownHeadPosition = 20
 
 def action_tilt_head():
+    global lastKnownHeadPosition
     BOT.sendServo(HEAD, lastKnownHeadPosition)
     positionTo = random.randint(0,40)
     currentPosition = lastKnownHeadPosition
